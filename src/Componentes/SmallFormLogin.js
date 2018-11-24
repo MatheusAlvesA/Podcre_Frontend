@@ -1,22 +1,59 @@
 import React, { Component } from 'react';
+const $ = window.$;
 
 export default class SmallFormLogin extends Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      "nome": "",
+      "senha": ""
+    };
+  }
+
+  submeter() {
+    $.ajax({
+             url: "https://podcre-223420.appspot.com/api/Login",
+             data: JSON.stringify(this.state),
+             type: "POST",
+             success: this.props.callbackSucesso,
+             error: this.erro.bind(this)
+          });
+  }
+
+  erro(r) {
+    $("#mensagemErro").css("display", "block");
+    setTimeout(()=>{$("#mensagemErro").css("display", "none");}, 2000);
+
+    if(this.props.callbackErro !== undefined && this.props.callbackErro !== null)
+      this.props.callbackErro(r);
+  }
+
+  watcher() {
+    this.setState({"nome": $("#inputNome").val()});
+    this.setState({"senha": $("#inputSenha").val()});
+  }
+
   render() {
     return (
       <div>
         <br />
         <form id="formLogin">
           <div className="form-group">
-              <label htmlFor="inputEmail">Login</label>
-              <input type="text" className="form-control" id="inputEmail" placeholder="Nome de usuário" />
+              <label htmlFor="inputNome">Login</label>
+              <input type="text" onChange={this.watcher.bind(this)} className="form-control" id="inputNome" placeholder="Nome de usuário" />
           </div>
           <div className="form-group">
-            <label htmlFor="inputPassword">Senha</label>
-            <input type="password" className="form-control" id="inputSenha" placeholder="Senha" />
+            <label htmlFor="inputSenha">Senha</label>
+            <input type="password" onChange={this.watcher.bind(this)} className="form-control" id="inputSenha" placeholder="Senha" />
           </div>
         </form>
         <div className="row">
-          <button className="btn btn-primary offset-6 col-5">Logar</button>
+          <button onClick={this.submeter.bind(this)} className="btn btn-primary offset-6 col-5">Logar</button>
+        </div>
+        <div className="row" id="mensagemErro" style={{"display": "none", "marginTop": "5px"}}>
+          <div className="alert alert-danger col-10 offset-1" role="alert">Falha no login</div>
         </div>
       </div>
     );
