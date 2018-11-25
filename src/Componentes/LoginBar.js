@@ -26,8 +26,8 @@ export default class LoginBar extends Component {
     $.ajax({
              url: "https://podcre-223420.appspot.com/api/Login",
              type: "GET",
-             success: this.setLogado(true),
-             error: this.setLogado(false)
+             success: (r) => {this.setLogado(true);},
+             error: (r) => {this.setLogado(false);}
           });
   }
 
