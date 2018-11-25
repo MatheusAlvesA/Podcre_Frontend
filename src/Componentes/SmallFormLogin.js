@@ -17,9 +17,14 @@ export default class SmallFormLogin extends Component {
              url: "https://podcre-223420.appspot.com/api/Login",
              data: JSON.stringify(this.state),
              type: "POST",
-             success: this.props.callbackSucesso,
+             success: this.sucesso.bind(this),
              error: this.erro.bind(this)
           });
+  }
+
+  sucesso(r) {
+    if(this.props.callbackSucesso !== undefined && this.props.callbackSucesso !== null)
+      this.props.callbackSucesso(this.state.nome);
   }
 
   erro(r) {
