@@ -15,3 +15,7 @@
   border-right: 1px solid grey;
   height: 100vw;
 }
+
+#infosUser {
+  border-bottom: 1px solid #D8D8D8;
+}

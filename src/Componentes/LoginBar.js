@@ -23,8 +23,8 @@ export default class LoginBar extends Component {
   }
 
   loginFeito(nome) {
-    this.setLogado(true);
     this.setState({"nome": nome});
+    this.setLogado(true);
   }
 
   checarLogado() {
