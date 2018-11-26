@@ -38,7 +38,7 @@ componentDidMount() {
     return (
       <div id="painelLogado" className="col-md-8">
         <InfosUser nomeUser={this.state.nome} email={this.state.email}/>
-        <PainelUparPodcast nomeUser={this.state.nome} email={this.state.email}/>
+        <PainelUparPodcast nomeUser={this.props.nomeUser} email={this.state.email}/>
       </div>
     );
   }
