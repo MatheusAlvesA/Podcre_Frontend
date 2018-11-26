@@ -3,6 +3,7 @@ import Navbar from './Componentes/Navbar.js';
 import LoginBar from './Componentes/LoginBar.js';
 import PainelLogado from './Componentes/PainelLogado.js';
 import PainelDeslogado from './Componentes/PainelDeslogado.js';
+const $ = window.$;
 
 class App extends Component {
 
@@ -11,11 +12,30 @@ class App extends Component {
 
     this.state = {
       "estaLogado": false,
-      "nomeUser": ""
+      "nomeUser": "",
+      "listaNomes": []
     };
 
     this.logado = this.logado.bind(this);
     this.deslogado = this.deslogado.bind(this);
+    this.preencherLista = this.preencherLista.bind(this);
+  }
+
+  componentDidMount() {
+    this.preencherLista();
+  }
+
+  preencherLista() {
+    $.ajax({
+             url: "https://podcre-223420.appspot.com/api/Estatisticas/listaNomes",
+             type: "GET",
+             success: (r) => {
+               const lista = r.data;
+               this.setState({"listaNomes": lista});
+               this.forceUpdate();
+             },
+             error: () => {}
+    });
   }
 
   logado(nome) {
@@ -28,9 +48,12 @@ class App extends Component {
   }
 
   render() {
-    let painel = <PainelDeslogado nomeUser="jovemnerd" />
+    let painel = null;
     if(this.state.estaLogado)
-      painel = <PainelLogado nomeUser={this.state.nomeUser} />
+      painel = <PainelLogado nomeUser={this.state.nomeUser} />;
+    else
+      painel = <PainelDeslogado listaNomes={this.state.listaNomes} />;
+
     return (
       <div>
         <Navbar />

@@ -14,45 +14,61 @@ export default class PainelDeslogado extends Component {
     this.buscarDados = this.buscarDados.bind(this);
   }
 
+  componentDidMount() {
+    for(let x = 0; x < this.props.listaNomes.length; x++)
+      this.buscarDados(this.props.listaNomes[x]);
+  }
 
-componentDidMount() {
-  this.buscarDados();
-}
+  componentWillReceiveProps(nextProps) {
+      for(let x = 0; x < this.props.listaNomes.length; x++)
+        this.buscarDados(this.props.listaNomes[x]);
+  }
 
-  buscarDados() {
+  buscarDados(nome) {
     $.ajax({
-             url: "https://podcre-223420.appspot.com/api/getPodcasts?nome="+this.props.nomeUser,
+             url: "https://podcre-223420.appspot.com/api/getPodcasts?nome="+nome,
              type: "GET",
-             success: (r) => {this.setState({
-               "lista": r.data
-             });},
+             success: (r) => {
+               const nova = {"nome": nome, "lista": r.data};
+               const lista = this.state.lista.slice();
+               lista.push(nova);
+               this.setState({
+                 "lista": lista
+                });},
              error: () => {setTimeout(this.buscarDados, 1000);}
           });
   }
 
   render() {
+    const listaExterna = [];
+    for(let x = 0; x < this.state.lista.length; x++) {
+      const lista = this.state.lista[x].lista.map(
+                      (epi) => {
+                        return <PainelEscutarPodcast
+                                  nomeUser={epi.nome}
+                                  nome={epi.nome}
+                                  assunto={epi.assunto}
+                                  likes={epi.n_likes}
+                                  dislikes={epi.n_dislikes}
+                                  blob={epi.key_blob}
+                                  chave={epi.chave}
 
-    const lista = this.state.lista.map(
-                    (epi) => {
-                      return <PainelEscutarPodcast
-                                nomeUser={this.props.nomeUser}
-                                nome={epi.nome}
-                                assunto={epi.assunto}
-                                likes={epi.n_likes}
-                                dislikes={epi.n_dislikes}
-                                blob={epi.key_blob}
-                                chave={epi.chave}
-
-                                key={epi.chave}
-                              />;
-                    });
-
-    return (
-      <div id="painelLogado" className="col-md-8">
-        <h1>Principais podcast</h1><hr />
-        <div className="row">
+                                  key={epi.chave}
+                                />;
+                      });
+      listaExterna.push(
+        <div className="row" key={x}>
+          <div className="col-12" style={{"textAlign": "right"}}>
+            <h4>{this.state.lista[x].nome}</h4>
+          </div>
           {lista}
         </div>
+      );
+    }
+    return (
+      <div id="painelDeslogado" className="col-md-8">
+        <h1>Principais podcasts</h1><hr />
+        {listaExterna}
       </div>
     );
   }
