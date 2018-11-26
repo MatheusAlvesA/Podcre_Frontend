@@ -54,7 +54,7 @@ export default class PainelUparPodcast extends Component {
             <button onClick={this.toggle} type="button" className="btn btn-outline-info">Upload</button>
           </div>
         </div>
-        <form id="formUpPodcast" style={{"display": "none"}} action={this.state.url} method="post" enctype="multipart/form-data">
+        <form id="formUpPodcast" style={{"display": "none"}} action={this.state.url} method="post" encType="multipart/form-data">
           <div className="form-group">
             <label htmlFor="nomePodcast">Nome do episódio</label>
             <input type="text" onChange={this.setNome.bind(this)} className="form-control" id="nomePodcast" placeholder="Nome" />

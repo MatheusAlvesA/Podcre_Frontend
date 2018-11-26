@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from './Componentes/Navbar.js';
 import LoginBar from './Componentes/LoginBar.js';
 import PainelLogado from './Componentes/PainelLogado.js';
+import PainelDeslogado from './Componentes/PainelDeslogado.js';
 
 class App extends Component {
 
@@ -9,6 +10,7 @@ class App extends Component {
     super(props);
 
     this.state = {
+      "estaLogado": false,
       "nomeUser": ""
     };
 
@@ -17,21 +19,24 @@ class App extends Component {
   }
 
   logado(nome) {
-    console.log(nome);
     this.setState({"nomeUser": nome});
+    this.setState({"estaLogado": true});
   }
 
   deslogado() {
-    console.log("[DESLOGADO]");
+    this.setState({"estaLogado": false});
   }
 
   render() {
+    let painel = <PainelDeslogado nomeUser="jovemnerd" />
+    if(this.state.estaLogado)
+      painel = <PainelLogado nomeUser={this.state.nomeUser} />
     return (
       <div>
         <Navbar />
         <div className="row" id="corpo">
           <LoginBar callbackLogado={this.logado} callbackDeslogado={this.deslogado} />
-          <PainelLogado nomeUser={this.state.nomeUser} />
+          {painel}
         </div>
       </div>
     );
