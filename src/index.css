@@ -27,4 +27,12 @@
 .painelEscutar {
   border-bottom: 1px solid lightgrey;
   margin-top: 10px;
+  overflow: hidden;
+  height: 25vh;
+  background-color: #E6E6FA;
+}
+
+.audiojs {
+  position: absolute;
+  bottom: 5px;
 }

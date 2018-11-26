@@ -49,7 +49,7 @@ componentDidMount() {
 
     return (
       <div id="painelLogado" className="col-md-8">
-        <h1>Principais podcast</h1>
+        <h1>Principais podcast</h1><hr />
         <div className="row">
           {lista}
         </div>
