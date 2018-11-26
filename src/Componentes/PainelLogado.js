@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import InfosUser from './InfosUser.js';
+import PainelUparPodcast from './PainelUparPodcast.js';
 const $ = window.$;
 
 export default class PainelLogado extends Component {
@@ -37,6 +38,7 @@ componentDidMount() {
     return (
       <div id="painelLogado" className="col-md-8">
         <InfosUser nomeUser={this.state.nome} email={this.state.email}/>
+        <PainelUparPodcast nomeUser={this.state.nome} email={this.state.email}/>
       </div>
     );
   }
