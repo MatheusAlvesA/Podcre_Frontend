@@ -56,14 +56,16 @@ export default class PainelDeslogado extends Component {
                                   key={epi.chave}
                                 />;
                       });
-      listaExterna.push(
-        <div className="row" key={x}>
-          <div className="col-12" style={{"textAlign": "right"}}>
-            <h4>{this.state.lista[x].nome}</h4>
+      if(lista.length > 0) {
+        listaExterna.push(
+          <div className="row" key={x}>
+            <div className="col-12" style={{"textAlign": "right"}}>
+              <h4>{this.state.lista[x].nome}</h4>
+            </div>
+            {lista}
           </div>
-          {lista}
-        </div>
-      );
+        );
+      }
     }
     return (
       <div id="painelDeslogado" className="col-md-8">

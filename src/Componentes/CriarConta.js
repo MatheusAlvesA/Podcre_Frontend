@@ -45,7 +45,7 @@ export default class CriarConta extends Component {
                 </div>
                 <div className="form-group">
                   <label htmlFor="senhaUser">Senha</label>
-                  <input type="text" className="form-control" id="senhaUser" placeholder="Escolha uma senha" />
+                  <input type="password" className="form-control" id="senhaUser" placeholder="Escolha uma senha" />
                 </div>
                 <div className="form-group">
                   <label htmlFor="emailUser">E-Mail</label>
