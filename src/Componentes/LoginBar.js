@@ -52,7 +52,7 @@ export default class LoginBar extends Component {
   render() {
 
     let seletor = <SmallFormLogin callbackSucesso={this.loginFeito.bind(this)} />;
-    if(this.state.logado) seletor = <SmallPainelLogin nome="jovemnerd" callbackLogout={() => {this.setLogado(false);}} />;
+    if(this.state.logado) seletor = <SmallPainelLogin nome={this.state.nome} callbackLogout={() => {this.setLogado(false);}} />;
 
     return (
       <div id="barraLogin" className="col-md-2 d-nome d-sm-none d-md-block">

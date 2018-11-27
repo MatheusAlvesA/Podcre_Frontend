@@ -3,6 +3,7 @@ import Navbar from './Componentes/Navbar.js';
 import LoginBar from './Componentes/LoginBar.js';
 import PainelLogado from './Componentes/PainelLogado.js';
 import PainelDeslogado from './Componentes/PainelDeslogado.js';
+import CriarConta from './Componentes/CriarConta.js';
 const $ = window.$;
 
 class App extends Component {
@@ -61,6 +62,7 @@ class App extends Component {
           <LoginBar callbackLogado={this.logado} callbackDeslogado={this.deslogado} />
           {painel}
         </div>
+        <CriarConta CallbackLogado={this.logado} />
       </div>
     );
   }
