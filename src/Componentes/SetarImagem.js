@@ -38,7 +38,7 @@ export default class SetarImagem extends Component {
               </button>
             </div>
             <div className="modal-body">
-              <form id="formUpPodcast" action={this.state.url} method="post" encType="multipart/form-data">
+              <form id="formUpImagem" action={this.state.url} method="post" encType="multipart/form-data">
                 <div className="custom-file">
                   <input type="file" className="custom-file-input" id="arquivoPodcast" name="arquivo" />
                   <label className="custom-file-label" htmlFor="arquivoPodcast">Escolha o arquivo</label>
