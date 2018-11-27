@@ -34,7 +34,7 @@ export default class SmallPainelLogin extends Component {
 
   preencher(dados) {
     dados = dados.data;
-    this.setState({"nome": dados.nome_display});
+    this.setState({"nome": this.props.nome});
     this.setState({"urlImg": "https://podcre-223420.appspot.com/api/getFile?cod="+dados.imagem_blob});
   }
 

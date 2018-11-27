@@ -4,6 +4,7 @@ import LoginBar from './Componentes/LoginBar.js';
 import PainelLogado from './Componentes/PainelLogado.js';
 import PainelDeslogado from './Componentes/PainelDeslogado.js';
 import CriarConta from './Componentes/CriarConta.js';
+import SetarImagem from './Componentes/SetarImagem.js';
 const $ = window.$;
 
 class App extends Component {
@@ -57,12 +58,13 @@ class App extends Component {
 
     return (
       <div>
-        <Navbar />
+        <Navbar logado={this.state.estaLogado} />
         <div className="row" id="corpo">
           <LoginBar callbackLogado={this.logado} callbackDeslogado={this.deslogado} />
           {painel}
         </div>
         <CriarConta CallbackLogado={this.logado} />
+        <SetarImagem />
       </div>
     );
   }
