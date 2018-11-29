@@ -59,7 +59,7 @@ export default class PainelDeslogado extends Component {
       if(lista.length > 0) {
         listaExterna.push(
           <div className="row" key={x}>
-            <div className="col-12" style={{"textAlign": "right"}}>
+            <div className="col-12" style={{"textAlign": "right", "marginTop": "20px"}}>
               <h4>{this.state.lista[x].nome}</h4>
             </div>
             {lista}

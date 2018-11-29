@@ -1,24 +1,38 @@
 import React, { Component } from 'react';
-const audiojs = window.audiojs;
+import ReactAudioPlayer from 'react-audio-player';
 const $ = window.$;
 
 export default class PainelEscutarPodcast extends Component {
 
-  componentDidMount() {
-    audiojs.events.ready(function() {
-      audiojs.createAll();
-    });
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      "likeDado": false,
+      "dislikeDado": false
+    };
+
+    this.likeDado = this.likeDado.bind(this);
+    this.dislikeDado = this.dislikeDado.bind(this);
+  }
+
+  audioTocado() {
+    console.log("AUDIO TOCADO: "+this.props.blob);
   }
 
   likeDado() {
+    if(this.state.likeDado) return;
     $("#like_"+this.props.chave).removeClass("fa-thumbs-o-up");
     $("#like_"+this.props.chave).addClass("fa-thumbs-up");
+    this.setState({"likeDado": true});
     this.submeterLike();
   }
 
   dislikeDado() {
+    if(this.state.dislikeDado) return;
     $("#dislike_"+this.props.chave).removeClass("fa-thumbs-o-down");
     $("#dislike_"+this.props.chave).addClass("fa-thumbs-down");
+    this.setState({"dislikeDado": true});
     this.submeterDislike();
   }
 
@@ -27,9 +41,16 @@ export default class PainelEscutarPodcast extends Component {
       <div className="col-12 painelEscutar">
         <h1>{this.props.nome}</h1>
         <p className="text-muted">{this.props.assunto}</p>
-        <audio src={"https://podcre-223420.appspot.com/api/getFile?cod="+this.props.blob} preload="auto" />
-        <span id={"like_"+this.props.chave} onClick={this.likeDado.bind(this)} className="fa fa-thumbs-o-up" aria-hidden="true" style={{"position": "absolute", "left": "500px", "bottom": "10px", "cursor": "pointer"}}> {this.props.likes}</span>
-        <span id={"dislike_"+this.props.chave} onClick={this.dislikeDado.bind(this)} className="fa fa-thumbs-o-down" aria-hidden="true" style={{"position": "absolute", "left": "550px", "bottom": "10px", "cursor": "pointer"}}> {this.props.dislikes}</span>
+        <ReactAudioPlayer
+          src={"https://podcre-223420.appspot.com/api/getFile?cod="+this.props.blob}
+          autoPlay={false}
+          controls={true}
+          onPlay={this.audioTocado.bind(this)}
+        />
+      <div>
+          <span id={"like_"+this.props.chave} onClick={this.likeDado.bind(this)} className="fa fa-thumbs-o-up" aria-hidden="true"> {this.props.likes}</span>
+          <span id={"dislike_"+this.props.chave} onClick={this.dislikeDado.bind(this)} className="fa fa-thumbs-o-down" aria-hidden="true"> {this.props.dislikes}</span>
+        </div>
       </div>
     );
   }

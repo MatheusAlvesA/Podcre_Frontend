@@ -41,7 +41,7 @@ export default class SmallPainelLogin extends Component {
   render() {
     return (
       <div style={{"marginTop": "10px"}}>
-        <img src={this.state.urlImg} style={{"width": "50%"}} className="img-thumbnail" alt="Imagem de perfil" />
+        <img src={this.state.urlImg} style={{"width": "50%", "cursor": "pointer"}} className="img-thumbnail" alt="Imagem de perfil" data-toggle="modal" data-target="#setarImagem" />
         <h4>{this.state.nome}</h4>
         <div className="row">
           <button onClick={this.logout.bind(this)} className="btn btn-outline-danger offset-6 col-5">Logout</button>
