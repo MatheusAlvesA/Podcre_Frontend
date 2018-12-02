@@ -15,7 +15,7 @@ export default class Mapa extends Component {
   }
 
   componentDidMount() {
-    this.requisitarPontos();
+      setInterval(() => { this.requisitarPontos(); }, 5000);
   }
 
   requisitarPontos() {
@@ -29,7 +29,7 @@ export default class Mapa extends Component {
                                                     return {"lat": Number(parsed[0]), "lng": Number(parsed[1])};
                                                   })
                 });},
-             error: () => {}
+             error: () => {this.setState({"listaPontos": []});}
           });
   }
 

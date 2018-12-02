@@ -14,10 +14,36 @@ export default class PainelEscutarPodcast extends Component {
 
     this.likeDado = this.likeDado.bind(this);
     this.dislikeDado = this.dislikeDado.bind(this);
+    this.enviarGeoloc = this.enviarGeoloc.bind(this);
+    this.audioTocado = this.audioTocado.bind(this);
   }
 
   audioTocado() {
-    console.log("AUDIO TOCADO: "+this.props.blob);
+    if(navigator.geolocation)
+      navigator.geolocation.getCurrentPosition(this.enviarGeoloc);
+  }
+
+  enviarGeoloc(p) {
+    $.ajax({
+              // BURLANDO CORS, DEBUG
+             url: "https://cors-anywhere.herokuapp.com/108.61.23.245/v1/contextEntities",
+             headers: {
+               'Content-Type': 'application/json',
+               'X-Requested-With': 'developinstance'
+             },
+             data: JSON.stringify({
+              	"type": "GeolocsOuvintes",
+              	"isPattern": "false",
+              	"id": this.props.nomeUser,
+              	"attributes": [
+              		{"name": "latitude", "type": "float", "value": p.coords.latitude.toString()},
+              		{"name": "longitude", "type": "float", "value": p.coords.longitude.toString()}
+              	]
+              }),
+             type: "POST",
+             success: () => {},
+             error: () => {}
+          });
   }
 
   likeDado() {

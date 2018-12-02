@@ -12,6 +12,7 @@ export default class PainelLogado extends Component {
 
     this.state = {
       "nome": "",
+      "nomeUser": "",
       "email": "",
       "listaPodcasts": []
     };
@@ -30,6 +31,7 @@ export default class PainelLogado extends Component {
              type: "GET",
              success: (r) => {this.setState({
                "nome": r.data.nome_display,
+               "nomeUser": r.data.nome_user,
                "email": r.data.email
              });},
              error: () => {setTimeout(this.buscarDados, 1000);}
@@ -57,7 +59,7 @@ export default class PainelLogado extends Component {
     const lista = this.state.listaPodcasts.map(
                     (epi) => {
                       return <PainelEscutarPodcast
-                                nomeUser={epi.nome}
+                                nomeUser={this.state.nomeUser}
                                 nome={epi.nome}
                                 assunto={epi.assunto}
                                 likes={epi.n_likes}
