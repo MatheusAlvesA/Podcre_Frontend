@@ -45,7 +45,7 @@ export default class PainelDeslogado extends Component {
       const lista = this.state.lista[x].lista.map(
                       (epi) => {
                         return <PainelEscutarPodcast
-                                  nomeUser={epi.nome}
+                                  nomeUser={this.state.lista[x].nome}
                                   nome={epi.nome}
                                   assunto={epi.assunto}
                                   likes={epi.n_likes}
