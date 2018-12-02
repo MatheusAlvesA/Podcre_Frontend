@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import InfosUser from './InfosUser.js';
 import PainelUparPodcast from './PainelUparPodcast.js';
 import PainelEscutarPodcast from './PainelEscutarPodcast.js';
+import Mapa from './Mapa.js';
 const $ = window.$;
 
 export default class PainelLogado extends Component {
@@ -82,6 +83,16 @@ export default class PainelLogado extends Component {
         </div>
         <div className="row" id="painelPodcastsLogado" style={{"display": "none"}}>
           {lista}
+        </div>
+        <div className="row" style={{"marginTop": "10px"}}>
+            <div className="col-12">
+              <h3>Mapa de ouvintes:</h3>
+            </div>
+        </div>
+        <div className="row" style={{"marginTop": "20px"}}>
+            <div className="col-12">
+              <Mapa nome={this.props.nomeUser} />
+            </div>
         </div>
       </div>
     );
