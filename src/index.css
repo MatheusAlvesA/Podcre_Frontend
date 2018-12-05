@@ -40,4 +40,5 @@
 .painelEscutar > div > span {
   font-size: 20pt;
   margin-left: 10px;
+  cursor: pointer;
 }

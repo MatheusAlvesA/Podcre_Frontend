@@ -55,7 +55,7 @@ export default class LoginBar extends Component {
     if(this.state.logado) seletor = <SmallPainelLogin nome={this.state.nome} callbackLogout={() => {this.setLogado(false);}} />;
 
     return (
-      <div id="barraLogin" className="col-md-2 d-nome d-sm-none d-md-block">
+      <div id="barraLogin" className="col-md-2 d-none d-md-block">
         {seletor}
       </div>
     );

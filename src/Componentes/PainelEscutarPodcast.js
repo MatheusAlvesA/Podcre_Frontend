@@ -9,13 +9,20 @@ export default class PainelEscutarPodcast extends Component {
 
     this.state = {
       "likeDado": false,
-      "dislikeDado": false
+      "dislikeDado": false,
+      "nLikes": 0,
+      "nDislikes": 0
     };
 
     this.likeDado = this.likeDado.bind(this);
     this.dislikeDado = this.dislikeDado.bind(this);
     this.enviarGeoloc = this.enviarGeoloc.bind(this);
     this.audioTocado = this.audioTocado.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({"nLikes": this.props.likes});
+    this.setState({"nDislikes": this.props.dislikes});
   }
 
   audioTocado() {
@@ -47,18 +54,24 @@ export default class PainelEscutarPodcast extends Component {
   }
 
   likeDado() {
-    if(this.state.likeDado) return;
+    if(this.state.likeDado || this.state.dislikeDado) return;
     $("#like_"+this.props.chave).removeClass("fa-thumbs-o-up");
     $("#like_"+this.props.chave).addClass("fa-thumbs-up");
+
     this.setState({"likeDado": true});
+    this.setState({"nLikes": Number(this.state.nLikes)+1});
+
     this.submeterLike();
   }
 
   dislikeDado() {
-    if(this.state.dislikeDado) return;
+    if(this.state.dislikeDado || this.state.likeDado) return;
     $("#dislike_"+this.props.chave).removeClass("fa-thumbs-o-down");
     $("#dislike_"+this.props.chave).addClass("fa-thumbs-down");
+
     this.setState({"dislikeDado": true});
+    this.setState({"nDislikes": Number(this.state.nDislikes)+1});
+
     this.submeterDislike();
   }
 
@@ -74,8 +87,8 @@ export default class PainelEscutarPodcast extends Component {
           onPlay={this.audioTocado.bind(this)}
         />
       <div>
-          <span id={"like_"+this.props.chave} onClick={this.likeDado.bind(this)} className="fa fa-thumbs-o-up" aria-hidden="true"> {this.props.likes}</span>
-          <span id={"dislike_"+this.props.chave} onClick={this.dislikeDado.bind(this)} className="fa fa-thumbs-o-down" aria-hidden="true"> {this.props.dislikes}</span>
+          <span id={"like_"+this.props.chave} onClick={this.likeDado.bind(this)} className="fa fa-thumbs-o-up" aria-hidden="true"> {this.state.nLikes}</span>
+          <span id={"dislike_"+this.props.chave} onClick={this.dislikeDado.bind(this)} className="fa fa-thumbs-o-down" aria-hidden="true"> {this.state.nDislikes}</span>
         </div>
       </div>
     );
