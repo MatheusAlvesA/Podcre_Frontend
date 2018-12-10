@@ -29,6 +29,7 @@ export default class PainelLogado extends Component {
     $.ajax({
              url: "https://podcre-223420.appspot.com/api/user?nome="+this.props.nomeUser,
              type: "GET",
+             headers: { 'token-id': 'frontend_podcre' },
              success: (r) => {this.setState({
                "nome": r.data.nome_display,
                "nomeUser": r.data.nome_user,
@@ -42,6 +43,7 @@ export default class PainelLogado extends Component {
     $.ajax({
              url: "https://podcre-223420.appspot.com/api/getPodcasts?nome="+this.props.nomeUser,
              type: "GET",
+             headers: { 'token-id': 'frontend_podcre' },
              success: (r) => {this.setState({"listaPodcasts": r.data});},
              error: () => {setTimeout(this.buscarDados, 1000);}
           });

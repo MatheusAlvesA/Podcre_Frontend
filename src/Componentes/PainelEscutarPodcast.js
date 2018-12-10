@@ -98,6 +98,7 @@ export default class PainelEscutarPodcast extends Component {
     $.ajax({
              url: "https://podcre-223420.appspot.com/api/contar?qual=like&cod="+this.props.chave,
              type: "GET",
+             headers: { 'token-id': 'frontend_podcre' },
              success: () => {},
              error: () => {}
           });
@@ -107,6 +108,7 @@ export default class PainelEscutarPodcast extends Component {
     $.ajax({
              url: "https://podcre-223420.appspot.com/api/contar?qual=dislike&cod="+this.props.chave,
              type: "GET",
+             headers: { 'token-id': 'frontend_podcre' },
              success: () => {},
              error: () => {}
           });

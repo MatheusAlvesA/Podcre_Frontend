@@ -28,6 +28,7 @@ export default class PainelDeslogado extends Component {
     $.ajax({
              url: "https://podcre-223420.appspot.com/api/getPodcasts?nome="+nome,
              type: "GET",
+             headers: { 'token-id': 'frontend_podcre' },
              success: (r) => {
                const nova = {"nome": nome, "lista": r.data};
                const lista = this.state.lista.slice();

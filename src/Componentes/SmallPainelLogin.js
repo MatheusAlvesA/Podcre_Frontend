@@ -27,6 +27,7 @@ export default class SmallPainelLogin extends Component {
     $.ajax({
              url: "https://podcre-223420.appspot.com/api/user?nome="+this.props.nome,
              type: "GET",
+             headers: { 'token-id': 'frontend_podcre' },
              success: this.preencher.bind(this),
              error: () => {}
           });

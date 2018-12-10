@@ -31,6 +31,7 @@ class App extends Component {
     $.ajax({
              url: "https://podcre-223420.appspot.com/api/Estatisticas/listaNomes",
              type: "GET",
+             headers: { 'token-id': 'frontend_podcre' },
              success: (r) => {
                const lista = r.data;
                this.setState({"listaNomes": lista});

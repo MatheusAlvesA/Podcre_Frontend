@@ -22,6 +22,7 @@ export default class Mapa extends Component {
     $.ajax({
              url: "https://podcre-223420.appspot.com/api/Geoloc?nome="+this.props.nome,
              type: "GET",
+             headers: { 'token-id': 'frontend_podcre' },
              success: (r) => {
                this.setState({
                  "listaPontos": r.data.map((p) => {
